@@ -1,0 +1,65 @@
+﻿<Window x:Class="MyStickyNotes.UI.test"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" Title="Window1" Height="263" Width="275" WindowStyle="None" WindowState="Normal" AllowsTransparency="True" Background="{x:Null}" 
+        Foreground="{x:Null}" Opacity="1" 
+        >
+    <!--<Window.Resources>
+        <Storyboard x:Key="CloseButtonZoom">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="btnClose" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1">
+                    <SplineDoubleKeyFrame  KeyTime="00:00:00.1000000" Value="1.148">
+                    </SplineDoubleKeyFrame>
+                </splinedoublekeyframe>
+            </doubleanimationusingkeyframes>
+            <doubleanimationusingkeyframes begintime="00:00:00" storyboard.targetname="btnClose" storyboard.targetproperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <splinedoublekeyframe keytime="00:00:00" value="1">
+                    <splinedoublekeyframe keytime="00:00:00.1000000" value="1.148">
+                    </splinedoublekeyframe>
+                </splinedoublekeyframe>
+            </doubleanimationusingkeyframes>
+            <doubleanimationusingkeyframes begintime="00:00:00" storyboard.targetname="btnClose" storyboard.targetproperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <splinedoublekeyframe keytime="00:00:00" value="0">
+                    <splinedoublekeyframe keytime="00:00:00.1000000" value="1.333">
+                    </splinedoublekeyframe>
+                </splinedoublekeyframe>
+            </doubleanimationusingkeyframes>
+            <doubleanimationusingkeyframes begintime="00:00:00" storyboard.targetname="btnClose" storyboard.targetproperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <splinedoublekeyframe keytime="00:00:00" value="0">
+                    <splinedoublekeyframe keytime="00:00:00.1000000" value="1.624">
+                    </splinedoublekeyframe>
+                </splinedoublekeyframe>
+            </doubleanimationusingkeyframes>
+        </storyboard>
+        <storyboard x:key="CloseButtonZoomOut">
+            <doubleanimationusingkeyframes begintime="00:00:00" storyboard.targetname="btnClose" storyboard.targetproperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <splinedoublekeyframe keytime="00:00:00" value="1.152">
+                    <splinedoublekeyframe keytime="00:00:00.1000000" value="1">
+                    </splinedoublekeyframe>
+                </splinedoublekeyframe>
+            </doubleanimationusingkeyframes>
+            <doubleanimationusingkeyframes begintime="00:00:00" storyboard.targetname="btnClose" storyboard.targetproperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <splinedoublekeyframe keytime="00:00:00" value="1.152">
+                    <splinedoublekeyframe keytime="00:00:00.1000000" value="1">
+                    </splinedoublekeyframe>
+                </splinedoublekeyframe>
+            </doubleanimationusingkeyframes>
+            <doubleanimationusingkeyframes begintime="00:00:00" storyboard.targetname="btnClose" storyboard.targetproperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <splinedoublekeyframe keytime="00:00:00" value="1.368">
+                    <splinedoublekeyframe keytime="00:00:00.1000000" value="0">
+                    </splinedoublekeyframe>
+                </splinedoublekeyframe>
+            </doubleanimationusingkeyframes>
+            <doubleanimationusingkeyframes begintime="00:00:00" storyboard.targetname="btnClose" storyboard.targetproperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <splinedoublekeyframe keytime="00:00:00" value="1.667">
+                    <splinedoublekeyframe keytime="00:00:00.1000000" value="0">
+                    </splinedoublekeyframe>
+                </splinedoublekeyframe>
+            </doubleanimationusingkeyframes>
+        </storyboard>
+    
+    </Window.Resources>-->
+    
+</Window>

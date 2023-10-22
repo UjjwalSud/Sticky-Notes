@@ -1,0 +1,155 @@
+﻿<Window x:Class="MyStickyNotes.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:av="http://schemas.CodeLibrary.com/xaml/presentation" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:mouseEvents="clr-namespace:MyStickyNotes.Presentation.ViewModel;assembly=MyStickyNotes.Presentation.ViewModel"
+        WindowState="Normal" Closing="Window_Closing" StateChanged="Window_StateChanged" ShowInTaskbar="True"
+        Title="My Notes" Height="400" Width="450" Loaded="Window_Loaded" Icon="/resources/StickyIcon.ico"
+        AllowsTransparency="True" WindowStyle="None" Background="{x:Null}" >
+    <Border BorderBrush="#5e5e5e" BorderThickness="1" CornerRadius="10">
+        <Grid>
+            <Border>
+                <Grid>
+                    <DockPanel x:Name="LayoutRoot">
+                        <!-- filter control -->
+                        <Border x:Name="BorderWindowTop" MouseLeftButtonDown="BorderWindowTop_MouseLeftButtonDown" Background="#e8e8e8" CornerRadius="10,10,0,0" DockPanel.Dock="Top" VerticalAlignment="Top">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Style="{StaticResource AddButton}" Grid.Column="0" Padding="5" Command="{Binding Path=AddNewNoteCommand}" DockPanel.Dock="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" ToolTip="Add New Note">
+                                    <Button.Template>
+                                        <ControlTemplate>
+                                            <Image Stretch="None" >
+                                                <Image.Style>
+                                                    <Style TargetType="{x:Type Image}">
+                                                        <Setter Property="Source" Value="/MyStickyNotes.UI;component/resources/images/NewDocument_16x16.png"/>
+                                                        <!--<Style.Triggers>
+                                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                                        <Setter Property="Source" Value="/MyStickyNotes.UI;component/resources/images/EditTableHS.png"/>
+                                                                                    </Trigger>
+                                                                                </Style.Triggers>-->
+                                                    </Style>
+                                                </Image.Style>
+                                            </Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+
+                                <Border Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Stretch" Style="{StaticResource filterTextBorderStyle}" CornerRadius="4,4,4,4">
+                                    <DockPanel>
+                                        <Button  Command="{Binding Path=ResetFilterTextCommand}" Style="{StaticResource WindowButtonStyle}" Visibility="{Binding Path=ResetButtonVisibility}" DockPanel.Dock="Right" Width="20" Content="r" ToolTip="Clear" />
+                                        <TextBox HorizontalAlignment="Stretch" UndoLimit="4" Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Left" Style="{StaticResource filterTextStyle}" />
+                                    </DockPanel>
+                                </Border>
+                                <Button Height="30" Grid.Column="2" Padding="5" Click="btnClose_Click" Name="btnClose" 
+                                        Style="{StaticResource WindowButtonStyle}" ToolTip="Close"
+                                        DockPanel.Dock="Right" HorizontalAlignment="Center" VerticalAlignment="Center" >r</Button>
+                            </Grid>
+                            <!-- filter control -->
+                        </Border>
+                        <Border Height="10" DockPanel.Dock="Top" Background="#008bff" MouseLeftButtonDown="BorderWindowTop_MouseLeftButtonDown"/>
+                        <Border DockPanel.Dock="Bottom" CornerRadius="0,0,10,10">
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="White" Offset="1"/>
+                                    <GradientStop Color="#FF8CF2FF"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <Grid MouseLeftButtonDown="BorderWindowTop_MouseLeftButtonDown">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <ScrollViewer KeyboardNavigation.TabNavigation="Cycle" Margin="7,2,7,7" Grid.Row="0" VerticalScrollBarVisibility="Auto">
+                                    <ListBox BorderBrush="Transparent" Background="Transparent" Name="lstMyNotes" Control.MouseDoubleClick="lstMyNotes_MouseDoubleClick" 
+                                             AlternationCount="2" ItemsSource="{Binding Path=NoteEntityView}" Grid.Column="0" Grid.Row="1" 
+                                             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Margin="2,8">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition/>
+                                                        <RowDefinition/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock  Grid.Row="0" Grid.Column="0" Text="{Binding Path=str_TempNoteDescription}" TextWrapping="Wrap" />
+                                                    <StackPanel Margin="0 10 0 0" Grid.Row="1" Orientation="Horizontal"  HorizontalAlignment="Left">
+                                                        <Button  ToolTip="Edit Note" CommandParameter="{Binding Path=XMLName}" Command="{Binding Path=DataContext.ViewNoteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" Margin="0 0 5 0">
+                                                            <Button.Template>
+                                                                <ControlTemplate>
+                                                                    <Image Stretch="Uniform" >
+                                                                        <Image.Style>
+                                                                            <Style TargetType="{x:Type Image}">
+                                                                                <Setter Property="Source" Value="/MyStickyNotes.UI;component/resources/images/EditTableHS.png"/>
+                                                                                <!--<Style.Triggers>
+                                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                                        <Setter Property="Source" Value="/MyStickyNotes.UI;component/resources/images/EditTableHS.png"/>
+                                                                                    </Trigger>
+                                                                                </Style.Triggers>-->
+                                                                            </Style>
+                                                                        </Image.Style>
+                                                                    </Image>
+                                                                </ControlTemplate>
+                                                            </Button.Template>
+                                                        </Button>
+                                                        <Button  CommandParameter="{Binding Path=XMLName}" Command="{Binding Path=DataContext.DeleteNoteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" Margin="0" ToolTip="Delete Note">
+                                                            <Button.Template>
+                                                                <ControlTemplate>
+                                                                    <Image Stretch="Fill" >
+                                                                        <Image.Style>
+                                                                            <Style TargetType="{x:Type Image}">
+                                                                                <Setter Property="Source" Value="/MyStickyNotes.UI;component/resources/images/delete_16x16.png"/>
+                                                                                <!--<Style.Triggers>
+                                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                                        <Setter Property="Source" Value="/MyStickyNotes.UI;component/resources/images/EditTableHS.png"/>
+                                                                                    </Trigger>
+                                                                                </Style.Triggers>-->
+                                                                            </Style>
+                                                                        </Image.Style>
+                                                                    </Image>
+                                                                </ControlTemplate>
+                                                            </Button.Template>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
+                    </DockPanel>
+                    <Thumb x:Name="ThumbTopLeft" DragDelta="ThumbTopLeft_DragDelta" HorizontalAlignment="Left" Height="10" VerticalAlignment="Top" Width="10" Background="{x:Null}" Foreground="{x:Null}" Opacity="0" Cursor="SizeNWSE"/>
+                    <Thumb x:Name="ThumbTop" DragDelta="ThumbTop_DragDelta" Height="6" VerticalAlignment="Top" Background="{x:Null}" Foreground="{x:Null}" Opacity="0" Margin="10,0" Cursor="SizeNS"/>
+                    <Thumb x:Name="ThumbTopRight" DragDelta="ThumbTopRight_DragDelta" HorizontalAlignment="Right" Height="10" VerticalAlignment="Top" Width="10" Background="{x:Null}" Foreground="{x:Null}" Opacity="0" Cursor="SizeNESW"/>
+                    <Thumb x:Name="ThumbRight" DragDelta="ThumbRight_DragDelta" HorizontalAlignment="Right" Width="6" Background="{x:Null}" Foreground="{x:Null}" Opacity="0" Margin="0,10" Cursor="SizeWE"/>
+                    <Thumb x:Name="ThumbBottomRight" DragDelta="ThumbBottomRight_DragDelta" HorizontalAlignment="Right" Height="10" VerticalAlignment="Bottom" Width="10" Background="{x:Null}" Foreground="{x:Null}" Opacity="0" Cursor="SizeNWSE"/>
+                    <Thumb x:Name="ThumbBottom" DragDelta="ThumbBottom_DragDelta" Height="6" VerticalAlignment="Bottom" Background="{x:Null}" Foreground="{x:Null}" Opacity="0" Margin="10,0" Cursor="SizeNS"/>
+                    <Thumb x:Name="ThumbBottomLeft" DragDelta="ThumbBottomLeft_DragDelta" HorizontalAlignment="Left" Height="10" VerticalAlignment="Bottom" Width="10" Background="{x:Null}" Foreground="{x:Null}" Opacity="0" Cursor="SizeNESW"/>
+                    <Thumb x:Name="ThumbLeft" DragDelta="ThumbLeft_DragDelta" HorizontalAlignment="Left" Width="6" Background="{x:Null}" Foreground="{x:Null}" Opacity="0" Margin="0,10" Cursor="SizeWE"/>
+                </Grid>
+            </Border>
+            <!--Notification Icon-->
+            <av:NotifyIcon DoubleClick="OpenGrid_Click" Name="notifyIcon" Icon="/MyStickyNotes.UI;component/resources/StickyIcon.ico" Text="My Notes"  Margin="0,-11,0,11">
+                <FrameworkElement.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="New Note" Name="AddNewNote"  Click="AddNewNote_Click" />
+                        <MenuItem Header="Exit" Name="ExitApplication" Click="ExitApplication_Click" />
+                        <MenuItem Header="Open" Name="OpenGrid" Click="OpenGrid_Click" />
+                    </ContextMenu>
+                </FrameworkElement.ContextMenu>
+            </av:NotifyIcon>
+            <!--Notification Icon-->
+        </Grid>
+    </Border>
+</Window>

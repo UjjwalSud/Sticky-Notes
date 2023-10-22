@@ -1,0 +1,74 @@
+﻿<Window x:Class="MyStickyNotes.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:av="http://schemas.CodeLibrary.com/xaml/presentation" 
+        xmlns:mouseEvents="clr-namespace:MyStickyNotes.Presentation.ViewModel;assembly=MyStickyNotes.Presentation.ViewModel"
+        WindowState="Normal" Background="Transparent" WindowStyle="None" 
+        Closing="Window_Closing" StateChanged="Window_StateChanged" AllowsTransparency="True" ShowInTaskbar="True"
+        Title="My Notes" Height="400" Width="450" Loaded="Window_Loaded" 
+        
+        >
+    <Window.Resources>
+
+    </Window.Resources>
+    <Grid Background="Transparent">
+        <Border  Background="#FFF" Style="{StaticResource databaseViewOuterBorder}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <!--<RowDefinition Height="Auto" />-->
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <!-- filter control -->
+                <Border Grid.Row="0" Style="{StaticResource filterTextBorderStyle}" CornerRadius="4,4,4,4">
+                    <DockPanel>
+                        <Button Command="{Binding Path=ResetFilterTextCommand}" Visibility="{Binding Path=ResetButtonVisibility}" DockPanel.Dock="Right" Content="X" Style="{StaticResource filterButtonStyle}" BorderBrush="{x:Null}" />
+                        <TextBox UndoLimit="4" Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Left" Style="{StaticResource filterTextStyle}" />
+                    </DockPanel>
+                </Border>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1">
+                    <Button Margin="10" Padding="5" Command="{Binding Path=AddNewNoteCommand}">New Note</Button>
+                    <Button Click="btnClose_Click" Margin="10" Name="btnClose" Padding="5">Close</Button>
+                </StackPanel>
+                <!-- filter control -->
+                <ScrollViewer KeyboardNavigation.TabNavigation="Cycle" Style="{StaticResource FavsScrollViewer}" Margin="7,2,7,7" Grid.Row="2" VerticalScrollBarVisibility="Visible">
+                    <ListBox ItemsSource="{Binding Path=NoteEntityView}" Grid.Column="0" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="2,8">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Grid.Row="0" Grid.Column="0" Text="{Binding Path=str_TempNoteDescription}" TextWrapping="Wrap" />
+                                    <StackPanel Grid.Row="1" Orientation="Horizontal"  HorizontalAlignment="Left">
+                                        <Button CommandParameter="{Binding Path=XMLName}" Command="{Binding Path=DataContext.ViewNoteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" Width="100" Margin="5">View</Button>
+                                        <Button CommandParameter="{Binding Path=XMLName}" Command="{Binding Path=DataContext.DeleteNoteCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" Width="100" Margin="5">Delete</Button>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+        <Border  Name="PART_Title"  Background="{StaticResource formAndButtonBarsBrush}" Margin="20,2" Padding="5,1,5,1" BorderBrush="#5B42B4" BorderThickness="0" CornerRadius="7,7,7,7" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+            <TextBlock Margin="7" FontWeight="Bold" Foreground="#fff" Text="My Notes" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        </Border>
+        <!--Notification Icon-->
+        <av:NotifyIcon Name="notifyIcon" Icon="/MyStickyNotes.UI;component/resources/StickyIcon.ico" Text="My Notes"  Margin="0,-11,0,11">
+            <FrameworkElement.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="New Note" Name="AddNewNote"  Click="AddNewNote_Click" />
+                    <MenuItem Header="Exit" Name="ExitApplication" Click="ExitApplication_Click" />
+                    <MenuItem Header="Open" Name="OpenGrid" Click="OpenGrid_Click" />
+                </ContextMenu>
+            </FrameworkElement.ContextMenu>
+        </av:NotifyIcon>
+        <!--Notification Icon-->
+    </Grid>
+</Window>
