@@ -5,10 +5,26 @@ The project built in WPF using MVVM structure
 - Data is stored in XML
 - Som screenshots to give how it looks
 - **1st Screen**
-- ![image](https://github.com/UjjwalSud/Sticky-Notes/assets/6552252/b7b60989-4ba3-4189-ba00-b81520eefef3)
+  
+![image](https://github.com/UjjwalSud/Sticky-Notes/assets/6552252/6203265b-5e5d-4fef-a4fb-3530693303ab)
+
 - **Add New Note**
-- ![image](https://github.com/UjjwalSud/Sticky-Notes/assets/6552252/5f50f502-943b-4359-9e45-d53ae1e5bb8c)
+  
+![image](https://github.com/UjjwalSud/Sticky-Notes/assets/6552252/038fa819-15d0-4a4b-9ff4-4dcc7a28e0d7)
+
 - **Note Options**
-- ![image](https://github.com/UjjwalSud/Sticky-Notes/assets/6552252/7667e490-117c-4699-8871-86bee46fb02e)
+
+![image](https://github.com/UjjwalSud/Sticky-Notes/assets/6552252/42d36aca-7109-4be2-a45c-84835c43d60c)
+
+- **Grid with Notes**
+
+![image](https://github.com/UjjwalSud/Sticky-Notes/assets/6552252/cd25a079-c367-4846-b71b-96d3e777f4a8)
+
+- **Delete Confirmation**
+
+![image](https://github.com/UjjwalSud/Sticky-Notes/assets/6552252/bbcd88c0-933f-40dc-ae00-2b0ea01710c5)
+
 - **Data Saved XML structure**
-- ![image](https://github.com/UjjwalSud/Sticky-Notes/assets/6552252/27cc40d6-b65c-410b-a6c8-ab4376c24f54)
+
+![image](https://github.com/UjjwalSud/Sticky-Notes/assets/6552252/ace346f8-15c1-4242-ab80-c3ae56b7262b)
+
