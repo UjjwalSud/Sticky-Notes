@@ -3,7 +3,7 @@
 The project built in WPF using MVVM structure
 - tried to create a replica of Sticky notes that Windows used to have
 - Data is stored in XML
-- Som screenshots to give how it looks
+- Some screenshots to give how it looks
 - **1st Screen**
   
 ![image](https://github.com/UjjwalSud/Sticky-Notes/assets/6552252/6203265b-5e5d-4fef-a4fb-3530693303ab)
